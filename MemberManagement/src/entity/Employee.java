@@ -1,5 +1,8 @@
-package po;
-public class Employee {
+package entity;
+
+import java.io.Serializable;
+
+public class Employee implements Serializable{
 	 String name;
 	 String sex;
 	 int age;
