@@ -1,4 +1,4 @@
-package view;
+package employeeView;
 
 import java.util.List;
 

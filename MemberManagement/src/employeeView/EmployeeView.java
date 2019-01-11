@@ -1,4 +1,4 @@
-package view;
+package employeeView;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
