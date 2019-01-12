@@ -6,44 +6,61 @@ import javax.swing.table.AbstractTableModel;
 
 import entity.Employee;
 
-public class EmployeeTableModel extends AbstractTableModel{
-	//table作显示用
-	//list存数据
-//tableModel以什么规则让table怎么显示数据
-	private List<Employee>list;	
-	public EmployeeTableModel(List<Employee>list){
-		this.list=list;		
+public class EmployeeTableModel extends AbstractTableModel {
+
+	private List<Employee> list;
+	private String[] columnNames = { "id", "姓名", "性别", "年龄","联系方式", "组别" };
+
+	public EmployeeTableModel(List<Employee> list) {
+		this.list = list;
 	}
-	public String getColumnName(int column){
-		if(column==0){
-		return "姓名";
-		}else if(column==1){
-			return "性别";
-		}else if(column==2){
-			return "年龄";
-		}
-		return "";
+
+	public void setList(List<Employee> list) {
+		this.list = list;
 	}
-	@Override
-	public int getColumnCount() {
-		return list.size();
+
+	public String getColumnName(int column) {
+
+		return columnNames[column];
 	}
 
 	@Override
 	public int getRowCount() {
-		return 3;
+		// TODO Auto-generated method stub
+		return list.size();
 	}
 
 	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return columnNames.length;
+	}
+
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return true;
+	}
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+    
+    
+    }
+	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		if(columnIndex==0){
+		if (columnIndex == 0) {
+			return list.get(rowIndex).getId();
+		} else if (columnIndex == 1) {
 			return list.get(rowIndex).getName();
-		}else if(columnIndex==1){
+		} else if (columnIndex == 2) {
 			return list.get(rowIndex).getSex();
-		}else if(columnIndex==2){
+		} else if (columnIndex == 3) {
 			return list.get(rowIndex).getAge();
+		} else if (columnIndex == 4) {
+			return list.get(rowIndex).getTelephone();
+		} else if (columnIndex == 5) {
+			return list.get(rowIndex).getGp().getName();
+		} else {
+			return "";
 		}
-		return null;
+
 	}
 
 }
