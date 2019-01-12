@@ -15,7 +15,7 @@ public class BaseDao {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// 3 建立连接
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/company?characterEncoding=utf-8", "root",
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/member?characterEncoding=utf-8", "root",
 					"123456");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
