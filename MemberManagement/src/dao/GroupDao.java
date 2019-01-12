@@ -45,7 +45,7 @@ public class GroupDao extends BaseDao {
 	}
 
 	public List<Group> searchByCondition(Group condition) {
-		List<Group> list = new ArrayList<Group>();
+		List<Group> list = new ArrayList<>();
 		Connection conn = null;
 		Statement stat = null;
 		ResultSet rs = null;
@@ -61,7 +61,7 @@ public class GroupDao extends BaseDao {
 			if (condition.getgCount() != -1) {
 				where += " and emp_count=" + condition.getgCount();
 			}
-			String sql = "select * from group " + where;
+			String sql = "select * from group1 " + where;
 			rs = stat.executeQuery(sql);
 			// 6 对结果集进行处理
 			while (rs.next()) {
@@ -89,7 +89,7 @@ public class GroupDao extends BaseDao {
 			// 4 建立statement sql语句执行器
 			stat = conn.createStatement();
 			// 5 执行sql语句并得到结果
-			int rs = stat.executeUpdate("insert into group(name) values('" + g.getName() + "')");
+			int rs = stat.executeUpdate("insert into group1(name) values('" + g.getName() + "')");
 			// 6 对结果集进行处理
 			if (rs > 0) {
 				flag = true;
@@ -118,7 +118,7 @@ public class GroupDao extends BaseDao {
 			// + selectEmp.getAge() + " where id=" + selectEmp.getId();
 			// System.out.println(sql);
 			// int rs = stat.executeUpdate(sql);
-			String sql = "update group set name=? where id=?";
+			String sql = "update group1 set name=? where id=?";
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, g.getName());
 			pstat.setInt(2, g.getId());
@@ -143,7 +143,7 @@ public class GroupDao extends BaseDao {
 		try {
 			conn = getConnection();
 			conn.setAutoCommit(false);
-			String sql = "delete from group where id=?";
+			String sql = "delete from group1 where id=?";
 			pstat = conn.prepareStatement(sql);
 			pstat.setInt(1, id);
 			int rs = pstat.executeUpdate();
@@ -185,7 +185,7 @@ public class GroupDao extends BaseDao {
 		Statement stat = null;
 		try {
 			conn = getConnection();
-			String sql = "delete from group where id in (" + ids + ")";
+			String sql = "delete from group1 where id in (" + ids + ")";
 			stat = conn.createStatement();
 
 			int rs = stat.executeUpdate(sql);

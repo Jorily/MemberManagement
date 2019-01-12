@@ -20,11 +20,11 @@ import javax.swing.JTextField;
 import dao.GroupDao;
 import entity.Group;
 import util.CallBack;
-import group_carView.g_cView;
+import group_carView.G_C_View;
 
 public class GroupView {
 	List<Group> list = new ArrayList<>();
-	GroupDao depDao = new GroupDao();
+	GroupDao gDao = new GroupDao();
 	JTable table;
 	GroupTableModel model;
 
@@ -75,13 +75,13 @@ public class GroupView {
 				Group g = new Group();
 				g.setName(name);
 				g.setgCount(empCount);
-				list = depDao.searchByCondition(g);
+				list = gDao.searchByCondition(g);
 				refreshTable(list);
 			}
 		});
 		panel1.add(searchBtn);
 		// 查出所有的员工来
-		list = depDao.search();
+		list = gDao.search();
 
 		model = new GroupTableModel(list);
 		table = new JTable();
@@ -161,12 +161,9 @@ public class GroupView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int index = table.getSelectedRow();
 				if (index > -1) {
-
-					g_cView view = new g_cView(list.get(index));
-
+					G_C_View view = new G_C_View(list.get(index));
 					view.init();
 				} else {
 					JOptionPane.showMessageDialog(null, "请选中一条数据");
@@ -186,11 +183,11 @@ public class GroupView {
 			int option = JOptionPane.showConfirmDialog(null, "确认删除吗？", "确认", JOptionPane.YES_NO_OPTION);
 			if (option == 0) {
 				int id = list.get(index).getId();
-				boolean flag = depDao.delete(id);
+				boolean flag = gDao.delete(id);
 				if (flag) {
-					JOptionPane.showMessageDialog(null, "保存成功！");
+					JOptionPane.showMessageDialog(null, "删除失败！");
 				} else {
-					JOptionPane.showMessageDialog(null, "保存失败！");
+					JOptionPane.showMessageDialog(null, "删除成功！");
 				}
 
 				refreshTable();
@@ -212,7 +209,7 @@ public class GroupView {
 					deleteIds += list.get(indexs[i]).getId() + ",";
 				}
 				deleteIds = deleteIds.substring(0, deleteIds.length() - 1);
-				depDao.delete(deleteIds);
+				gDao.delete(deleteIds);
 				refreshTable();
 			}
 
@@ -223,7 +220,7 @@ public class GroupView {
 	}
 
 	public void refreshTable() {
-		list = depDao.search();
+		list = gDao.search();
 		model.setList(list);
 		table.updateUI();
 	}
