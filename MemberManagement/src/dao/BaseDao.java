@@ -11,6 +11,7 @@ public class BaseDao {
 	public Connection getConnection() {
 		Connection conn = null;
 		// 2 利用反射，加载数据库驱动
+		//在调用DriverManager的getConnection方法之前，保证相应的Driver类已经被加载到 jvm中，并且完成了类的初始化
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 

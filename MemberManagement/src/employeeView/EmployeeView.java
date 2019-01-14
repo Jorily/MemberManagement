@@ -29,17 +29,17 @@ import employeeView.EmployeeTableModel;
 
 public class EmployeeView {
 	List<Employee> list=new ArrayList<Employee>();//存数据
+	List<Group> gList;
 	EmployeeDao empDao = new EmployeeDao();
 	GroupDao gDao = new GroupDao();
 	JTable table;
 	EmployeeTableModel model;
 	JComboBox gBox;
-	List<Group> gList;
+	
 	public void init(){
 		JFrame jf=new JFrame("赛车小会员管理系统");
 		jf.setSize(700, 500);//程序窗口大小
 		jf.setLocationRelativeTo(null);//以屏幕中心为中心点显示
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//关闭程序
 		
 		JPanel mainPanel=(JPanel)jf.getContentPane();//初始化一个容器
 		//上中下布局
@@ -89,13 +89,15 @@ public class EmployeeView {
 		JLabel gLabel = new JLabel();
 		gLabel.setText("部门");
 		panel1.add(gLabel);
-		gList = gDao.search();
-		gBox = new JComboBox();
+		
+		gList = gDao.search();//获取group集合
+		
+		gBox = new JComboBox();//下拉列表
 		gBox.addItem("请选择部门");
 		for (int i = 0; i < gList.size(); i++) {
 			gBox.addItem(gList.get(i).getName());
 		}
-		gBox.setPreferredSize(new Dimension(100, 30));
+		gBox.setPreferredSize(new Dimension(100, 30));//使用布局管理器情况下，使用setPreferredSize()更具体设置更优先
 		panel1.add(gBox);
 		
 		JButton  searchBtn=new JButton();
@@ -123,8 +125,7 @@ public class EmployeeView {
 				if (index == 0) {
 					gp.setId(-1);
 				} else {
-
-					gp = gList.get(index - 1);
+					gp = gList.get(index - 1);//0开始
 				}
 				emp.setGp(gp);
 				list = empDao.searchByCondition(emp);
@@ -133,7 +134,7 @@ public class EmployeeView {
 		});
 		panel1.add(searchBtn);
 		list = empDao.search();
-		model=new EmployeeTableModel(list);
+		model=new EmployeeTableModel(list);//
 		table=new JTable();
 		table.setModel(model);
 		//滚动条
@@ -162,7 +163,6 @@ public class EmployeeView {
 		deleteBtn.setPreferredSize(new Dimension(60, 30));
 		deleteBtn.setText("删除");
 		deleteBtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// delete();
@@ -175,15 +175,12 @@ public class EmployeeView {
 		updateBtn.setPreferredSize(new Dimension(60, 30));
 		updateBtn.setText("修改");
 		updateBtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				if (index > -1) {
-
 					Employee selectEmp = list.get(index);
 					new UpdateEmployeeView(selectEmp, new CallBack() {
-
 						@Override
 						public void call() {
 							table.updateUI();
@@ -197,7 +194,6 @@ public class EmployeeView {
 		panel3.add(updateBtn);
 		jf.setVisible(true);
 	}
-	
 	public void delete() {
 		int index = table.getSelectedRow();
 		if (index > -1) {

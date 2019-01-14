@@ -28,7 +28,7 @@ public class AddEmployeeView extends SuperEmployeeView {
 	public void openFrame() {
 		if (frame == null) {
 			init();
-		} else {
+		} else {//不为空则把其值初始化
 			nameText.setText("");
 			sexBox.setSelectedItem("男");
 			ageText.setText("");
@@ -61,7 +61,7 @@ public class AddEmployeeView extends SuperEmployeeView {
 				} else {
 					JOptionPane.showMessageDialog(null, "保存失败！");
 				}
-
+				//释放由此 Window、其子组件及其拥有的所有子组件所使用的所有本机屏幕资源。即这些 Component 的资源将被破坏，它们使用的所有内存都将返回到操作系统，并将它们标记为不可显示。
 				frame.dispose();
 				callBack.call();
 

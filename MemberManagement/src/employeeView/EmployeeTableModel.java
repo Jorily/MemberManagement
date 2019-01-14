@@ -39,10 +39,7 @@ public class EmployeeTableModel extends AbstractTableModel {
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return true;
 	}
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    
-    
-    }
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {}
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		if (columnIndex == 0) {

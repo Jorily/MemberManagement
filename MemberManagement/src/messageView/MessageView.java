@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -20,8 +21,12 @@ import javax.swing.JTextField;
 
 import dao.GroupDao;
 import dao.MessageDao;
+import employeeView.UpdateEmployeeView;
+import entity.Car;
+import entity.Employee;
 import entity.Group;
 import entity.Message;
+import util.CallBack;
 
 public class MessageView {
 	List<Message> list = new ArrayList<>();
@@ -29,7 +34,7 @@ public class MessageView {
 	GroupDao gDao = new GroupDao();
 	JTable table;
 	MessageTableModel model;
-	JComboBox depBox;
+	JComboBox gBox;
 
 	List<Group> gList;
 
@@ -49,7 +54,7 @@ public class MessageView {
 		mainPanel.add(panel1);
 		mainPanel.add(panel2);
 		mainPanel.add(panel3);
-
+		
 		JLabel nameLabel = new JLabel();
 		nameLabel.setText("姓名");
 		panel1.add(nameLabel);
@@ -57,60 +62,51 @@ public class MessageView {
 		nameText.setPreferredSize(new Dimension(80, 30));
 		panel1.add(nameText);
 
-		JLabel sexLabel = new JLabel();
-		sexLabel.setText("性别");
-		panel1.add(sexLabel);
-		JTextField sexText = new JTextField();
-		sexText.setPreferredSize(new Dimension(80, 30));
-		panel1.add(sexText);
-
-		JLabel ageLabel = new JLabel();
-		ageLabel.setText("年龄");
-		panel1.add(ageLabel);
-		JTextField ageText = new JTextField();
-		ageText.setPreferredSize(new Dimension(80, 30));
-		panel1.add(ageText);
+		JLabel carLabel = new JLabel();
+		carLabel.setText("车");
+		panel1.add(carLabel);
+		JTextField carText = new JTextField();
+		carText.setPreferredSize(new Dimension(80, 30));
+		panel1.add(carText);
 
 		JLabel depLabel = new JLabel();
-		depLabel.setText("部门");
+		depLabel.setText("组别");
 		panel1.add(depLabel);
 		gList = gDao.search();
-		depBox = new JComboBox();
-		depBox.addItem("请选择部门");
+		gBox = new JComboBox();
+		gBox.addItem("请选择组别");
 		for (int i = 0; i < gList.size(); i++) {
-			depBox.addItem(gList.get(i).getName());
+			gBox.addItem(gList.get(i).getName());
 		}
-		depBox.setPreferredSize(new Dimension(100, 30));
-		panel1.add(depBox);
+		gBox.setPreferredSize(new Dimension(100, 30));
+		panel1.add(gBox);
 
 		JButton searchBtn = new JButton();
 		searchBtn.setText("搜索");
 		searchBtn.setPreferredSize(new Dimension(80, 30));
 		searchBtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				String name = nameText.getText();
-				String sex = sexText.getText();
-				int age = -1;
-				try {
-					age = Integer.parseInt(ageText.getText());
-				} catch (Exception ex) {
-
-				}
-				Message sc = new Message();
-
-				Group dep = new Group();
-				int index = depBox.getSelectedIndex();
+				String car = carText.getText();
+				Employee em=new Employee();
+				em.setName(name);
+				Message mess = new Message();
+				Car c=new  Car();
+				c.setName(car);
+				Group g = new Group();
+				int index = gBox.getSelectedIndex();
 				if (index == 0) {
-					dep.setId(-1);
+					g.setId(-1);
 				} else {
-					dep = gList.get(index - 1);
+					g = gList.get(index - 1);
 				}
-				// sc.setDep(dep);
-				// list = scDao.searchByCondition(sc);
-				// refreshTable(list);
+				 em.setGp(g);
+				 mess.setEmp(em);
+				 mess.setCar(c);
+				 list = mDao.searchByCondition(mess);
+				 refreshTable(list);
 			}
 		});
 		panel1.add(searchBtn);
@@ -124,19 +120,27 @@ public class MessageView {
 		scroll.setPreferredSize(new Dimension(600, 300));
 		panel2.add(scroll);
 
-		JButton addBtn = new JButton();
-		addBtn.setText("保存");
-		addBtn.setPreferredSize(new Dimension(80, 30));
-		panel3.add(addBtn);
-		// addBtn.addActionListener(new ActionListenerClass());
-		addBtn.addActionListener(new ActionListener() {
+		JButton  updateBtn=new JButton();
+		updateBtn.setPreferredSize(new Dimension(60, 30));
+		updateBtn.setText("编辑");
+		updateBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Set<Message> set = model.getSaveSet();
-				mDao.save(set);
-				refreshTable();
+				int index = table.getSelectedRow();
+				if (index > -1) {
+					Message selectMess = list.get(index);
+					new UpdateMessageView(selectMess, new CallBack() {
+						@Override
+						public void call() {
+							table.updateUI();
+						}
+					}).init();
+				} else {
+					JOptionPane.showMessageDialog(null, "请选中一条数据");
+				}
 			}
 		});
+		panel3.add(updateBtn);
 
 		frame.setVisible(true);
 
@@ -144,6 +148,10 @@ public class MessageView {
 
 	public void refreshTable() {
 		list = mDao.search();
+		model.setList(list);
+		table.updateUI();
+	}
+	public void refreshTable(List<Message> list) {
 		model.setList(list);
 		table.updateUI();
 	}
