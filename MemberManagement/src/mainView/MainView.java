@@ -17,7 +17,7 @@ import messageView.MessageView;
 public class MainView {
 
 	public void init() {
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("赛车俱乐部会员管理系统");
 		frame.setSize(400, 260);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);

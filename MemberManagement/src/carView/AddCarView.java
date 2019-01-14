@@ -41,10 +41,8 @@ public class AddCarView extends SuperCarView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String name = nameText.getText();
-
 				Car c = new Car();
 				c.setName(name);
-
 				CarDao proDao = new CarDao();
 				boolean flag = proDao.add(c);
 				if (flag) {

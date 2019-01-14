@@ -37,7 +37,7 @@ public class EmployeeView {
 	JComboBox gBox;
 	
 	public void init(){
-		JFrame jf=new JFrame("赛车小会员管理系统");
+		JFrame jf=new JFrame("赛车俱乐部会员管理系统");
 		jf.setSize(700, 500);//程序窗口大小
 		jf.setLocationRelativeTo(null);//以屏幕中心为中心点显示
 		
@@ -87,13 +87,13 @@ public class EmployeeView {
 		panel1.add(phoneField);
 		
 		JLabel gLabel = new JLabel();
-		gLabel.setText("部门");
+		gLabel.setText("组别");
 		panel1.add(gLabel);
 		
 		gList = gDao.search();//获取group集合
 		
 		gBox = new JComboBox();//下拉列表
-		gBox.addItem("请选择部门");
+		gBox.addItem("请选择分组");
 		for (int i = 0; i < gList.size(); i++) {
 			gBox.addItem(gList.get(i).getName());
 		}

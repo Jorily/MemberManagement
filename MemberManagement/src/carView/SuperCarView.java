@@ -15,9 +15,7 @@ import javax.swing.JTextField;
 public class SuperCarView {
 	JFrame frame;
 	JTextField nameText;
-
 	JButton saveBtn;
-
 	public void init() {
 		frame = new JFrame();
 		frame.setSize(300, 400);

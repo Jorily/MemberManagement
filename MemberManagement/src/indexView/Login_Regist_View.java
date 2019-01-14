@@ -18,7 +18,7 @@ import dao.IndexDao;
 import mainView.MainView;
 
 public class Login_Regist_View {
-	JFrame jf = new JFrame("赛车小会员管理系统");
+	JFrame jf = new JFrame("赛车俱乐部会员管理系统");
 
 	JPanel mainPanel = (JPanel) jf.getContentPane();//容器
 	//BoxLayout 可以把控件依次进行水平或者垂直排列布局，这是通过参数 X_AXIS、Y_AXIS 来决定的。
@@ -31,7 +31,6 @@ public class Login_Regist_View {
 	JLabel pwdLabel = new JLabel();
 	JPasswordField pwdField = new JPasswordField();//这里注意不要用JTextField,以保证输入密码是不可见的
 	
-
 	public void init() {
 		jf.setSize(400, 300);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

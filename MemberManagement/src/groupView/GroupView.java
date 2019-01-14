@@ -29,7 +29,7 @@ public class GroupView {
 	GroupTableModel model;
 
 	public void init() {
-		JFrame frame = new JFrame();
+		JFrame frame = new JFrame("赛车俱乐部会员管理系统");
 		frame.setSize(600, 500);
 		frame.setLocationRelativeTo(null);
 		JPanel mainPanel = (JPanel) frame.getContentPane();
