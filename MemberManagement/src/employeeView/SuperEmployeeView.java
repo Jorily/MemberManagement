@@ -76,8 +76,8 @@ public class SuperEmployeeView {
 		phoneText = new JTextField();
 		phoneText.setPreferredSize(new Dimension(80, 30));
 		panel4.add(phoneText);
-		JLabel gLabel = new JLabel();
 		
+		JLabel gLabel = new JLabel();
 		gLabel.setText("组别");
 		panel5.add(gLabel);
 		gList = gDao.search();

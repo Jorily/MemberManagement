@@ -153,7 +153,7 @@ public class GroupView {
 			}
 		});
 		JButton manageProjectBtn = new JButton();
-		manageProjectBtn.setText("管理项目");
+		manageProjectBtn.setText("管理车辆");
 		manageProjectBtn.setPreferredSize(new Dimension(120, 30));
 		panel3.add(manageProjectBtn);
 

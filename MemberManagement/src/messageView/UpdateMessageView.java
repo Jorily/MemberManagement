@@ -33,7 +33,6 @@ public class UpdateMessageView extends SuperMessageView {
 				String name = nameText.getText();
 				int time = Integer.parseInt(timeText.getText());
 				String ymd=ymdText.getText();
-				// Employee emp = new Employee();
 				emp.setName(name);
 				selectMess.setEmp(emp);
 				selectMess.setTime(time);
@@ -42,7 +41,6 @@ public class UpdateMessageView extends SuperMessageView {
 				Group gp =gList.get(gBox.getSelectedIndex());
 				selectMess.getEmp().setGp(gp);
 				// list.add(emp);
-
 				boolean flag = meDao.update(selectMess);
 				if (flag) {
 					JOptionPane.showMessageDialog(null, "保存成功！");

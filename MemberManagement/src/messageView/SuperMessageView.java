@@ -51,13 +51,6 @@ public class SuperMessageView {
 		mainPanel.add(panel5);
 		mainPanel.add(panel6);
 		
-		JLabel idLabel = new JLabel();
-		idLabel.setText("id");
-		panel1.add(idLabel);
-		idText = new JTextField();
-		idText.setPreferredSize(new Dimension(80, 30));
-		panel1.add(idText);
-		
 		JLabel nameLabel = new JLabel();
 		nameLabel.setText("姓名");
 		panel1.add(nameLabel);
@@ -65,16 +58,17 @@ public class SuperMessageView {
 		nameText.setPreferredSize(new Dimension(80, 30));
 		panel1.add(nameText);
 
-		JLabel groupLabel = new JLabel();
-		groupLabel.setText("组别");
-		panel2.add(groupLabel);
+		JLabel gLabel = new JLabel();
+		gLabel.setText("组别");
+		panel2.add(gLabel);
+		gList = gDao.search();
 		gBox = new JComboBox();
 		gBox.addItem("请选择组别");
 		for (int i = 0; i < gList.size(); i++) {
 			gBox.addItem(gList.get(i).getName());
 		}
-		gBox.setPreferredSize(new Dimension(100, 30));
-		panel1.add(gBox);
+		gBox.setPreferredSize(new Dimension(80, 30));
+		panel2.add(gBox);
 		
 		JLabel carLabel = new JLabel();
 		carLabel.setText("车");
@@ -93,13 +87,11 @@ public class SuperMessageView {
 		
 		JLabel ymdLabel = new JLabel();
 		ymdLabel.setText("购买日期");
-		panel4.add(ymdLabel);
+		panel5.add(ymdLabel);
 		ymdText = new JTextField();
 		ymdText.setPreferredSize(new Dimension(80, 30));
-		panel4.add(ymdText);
+		panel5.add(ymdText);
 	
-		panel5.add(gBox);
-
 		saveBtn = new JButton();
 		saveBtn.setText("保存");
 		saveBtn.setPreferredSize(new Dimension(80, 30));

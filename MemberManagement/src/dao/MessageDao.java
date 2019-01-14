@@ -160,9 +160,8 @@ public class MessageDao extends BaseDao {
 		PreparedStatement pstat = null;
 		try {
 			conn = getConnection();
-
 			// 5 执行sql语句并得到结果
-			String sql = "update score set time=? where id=?";
+			String sql = "update message set time=? where id=?";
 			// 4 建立statement sql语句执行器
 			pstat = conn.prepareStatement(sql);
 			pstat.setInt(1, mess.getTime());
