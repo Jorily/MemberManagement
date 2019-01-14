@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import dao.IndexDao;
@@ -27,7 +28,8 @@ public class LoginView {
 	JLabel idLabel = new JLabel();
 	JTextField idField = new JTextField();
 	JLabel pwdLabel = new JLabel();
-	JTextField pwdField = new JTextField();
+	JPasswordField pwdField = new JPasswordField();
+	
 
 	public void init() {
 		jf.setSize(400, 300);

@@ -4,8 +4,8 @@ public class Message {
 	private int id;
 	private Employee emp;//姓名
 	private Car car;//车
+	private Integer time;//剩余玩车时间
 	private String ymd;//购买年份
-	private int time;//剩余玩车时间
 	
 	public int getId() {
 		return id;
@@ -31,11 +31,12 @@ public class Message {
 	public void setYmd(String ymd) {
 		this.ymd = ymd;
 	}
-	public int getTime() {
+	public Integer getTime() {
 		return time;
 	}
-	public void setTime(int time) {
+	public void setTime(Integer time) {
 		this.time = time;
 	}
+
 	
 }

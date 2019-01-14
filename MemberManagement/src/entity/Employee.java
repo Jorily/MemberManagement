@@ -16,19 +16,7 @@ public class Employee implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	// public Employee(String n,String s,int a){
-	// name=n;
-	// if(s.equals("男")||s.equals("女")){
-	// sex=s;
-	// }else{
-	// sex="男";
-	// }
-	// if(a>0&&a<18){
-	// age=a;
-	// }else{
-	// age=10;
-	// }
-	// }
+	
 	public String getName() {
 		return name;
 	}
