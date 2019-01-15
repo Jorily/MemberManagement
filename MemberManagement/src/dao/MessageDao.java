@@ -11,7 +11,7 @@ import java.util.Set;
 import java.sql.PreparedStatement;
 
 import entity.Group;
-import entity.Employee;
+import entity.Member;
 import entity.Car;
 import entity.Message;
 
@@ -27,7 +27,7 @@ public class MessageDao extends BaseDao {
 			// 4 建立statement sql语句执行器
 			stat = conn.createStatement();
 			// 5 执行sql语句并得到结果
-			String sql = "select * from v_emp_mess ";
+			String sql = "select * from v_mem_mess ";
 			rs = stat.executeQuery(sql);
 			// 6 对结果集进行处理
 			while (rs.next()) {
@@ -36,9 +36,9 @@ public class MessageDao extends BaseDao {
 				mess.setTime((Integer) rs.getObject("time"));
 				mess.setYmd(rs.getString("ymd"));
 				
-				Employee emp = new Employee();
-				emp.setId(rs.getInt("e_id"));
-				emp.setName(rs.getString("e_name"));
+				Member emp = new Member();
+				emp.setId(rs.getInt("m_id"));
+				emp.setName(rs.getString("m_name"));
 
 				Group g = new Group();
 				g.setId(rs.getInt("g_id"));
@@ -79,7 +79,7 @@ public class MessageDao extends BaseDao {
 			// 5 执行sql语句并得到结果
 			String where = " where 1=1 ";//返回true，避免where 关键字后面的第一个词直接就是 “and”而导致语法错误
 			if (!me.getEmp().getName().equals("")) {
-				where += " and e.name='" + me.getEmp().getName() + "'";
+				where += " and m.name='" + me.getEmp().getName() + "'";
 			}
 			if (!me.getCar().getName().equals("")) {
 				where += " and c.name='" + me.getCar().getName() + "'";
@@ -87,7 +87,7 @@ public class MessageDao extends BaseDao {
 			if (me.getEmp().getGp().getId() != -1) {
 				where += " and g.id=" + me.getEmp().getGp().getId();
 			}
-			String sql = "select  e.id AS e_id,e.name AS e_name,g.id AS g_id,g.name AS g_name,c.id AS c_id,c.name AS c_name,mess.id AS mess_id,mess.time AS time,mess.ymd AS ymd from ((((employee e left join group1 g on((e.g_id = g.id))) left join message mess on((e.id = mess.e_id))) left join car c on((mess.c_id = c.id)))) "
+			String sql = "select  m.id AS m_id,m.name AS m_name,g.id AS g_id,g.name AS g_name,c.id AS c_id,c.name AS c_name,mess.id AS mess_id,mess.time AS time,mess.ymd AS ymd from ((((member m left join group1 g on((m.g_id = g.id))) left join message mess on((m.id = mess.m_id))) left join car c on((mess.c_id = c.id)))) "
 					+ where;
 			rs = stat.executeQuery(sql);
 
@@ -100,8 +100,8 @@ public class MessageDao extends BaseDao {
 				Group gp = new Group();
 				gp.setId(rs.getInt("g_id"));
 				gp.setName(rs.getString("g_name"));
-				Employee emp=new Employee();
-				emp.setName(rs.getString("e_name"));
+				Member emp=new Member();
+				emp.setName(rs.getString("m_name"));
 				emp.setGp(gp);
 				mess.setEmp(emp);
 				list.add(mess);
@@ -136,7 +136,7 @@ public class MessageDao extends BaseDao {
 			conn = getConnection();
 
 			// 5 执行sql语句并得到结果
-			String sql = "insert into message(e_id,c_id,time) values(?,?,?) ";
+			String sql = "insert into message(m_id,c_id,time) values(?,?,?) ";
 			// 4 建立statement sql语句执行器
 			pstat = conn.prepareStatement(sql);
 			pstat.setInt(1, mess.getEmp().getId());

@@ -2,7 +2,7 @@ package entity;
 
 public class Message {
 	private int id;
-	private Employee emp;//姓名
+	private Member emp;//姓名
 	private Car car;//车
 	private Integer time;//剩余玩车时间
 	private String ymd;//购买年份
@@ -13,10 +13,10 @@ public class Message {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Employee getEmp() {
+	public Member getEmp() {
 		return emp;
 	}
-	public void setEmp(Employee emp) {
+	public void setEmp(Member emp) {
 		this.emp = emp;
 	}
 	public Car getCar() {

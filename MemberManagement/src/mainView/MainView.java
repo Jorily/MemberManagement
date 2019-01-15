@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import groupView.GroupView;
-import employeeView.EmployeeView;
+import memberView.MemberView;
 import carView.CarView;
 import messageView.MessageView;
 
@@ -25,14 +25,14 @@ public class MainView {
 		panel.setLayout(new FlowLayout());
 		
 		JButton empBtn = new JButton();
-		empBtn.setText("员工管理");
+		empBtn.setText("会员管理");
 		empBtn.setPreferredSize(new Dimension(180, 90));
 		panel.add(empBtn);
 		empBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EmployeeView().init();
+				new MemberView().init();
 
 			}
 		});

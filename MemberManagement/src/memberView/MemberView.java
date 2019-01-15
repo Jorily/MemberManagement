@@ -1,4 +1,4 @@
-package employeeView;
+package memberView;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -18,22 +18,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import dao.EmployeeDao;
+import dao.MemberDao;
 import dao.GroupDao;
 import entity.Group;
+import memberView.AddMemberView;
+import memberView.MemberTableModel;
+import memberView.UpdateMemberView;
 import util.CallBack;
-import employeeView.AddEmployeeView;
-import employeeView.UpdateEmployeeView;
-import entity.Employee;
-import employeeView.EmployeeTableModel;
+import entity.Member;
 
-public class EmployeeView {
-	List<Employee> list=new ArrayList<Employee>();//存数据
+public class MemberView {
+	List<Member> list=new ArrayList<Member>();//存数据
 	List<Group> gList;
-	EmployeeDao empDao = new EmployeeDao();
+	MemberDao memDao = new MemberDao();
 	GroupDao gDao = new GroupDao();
 	JTable table;
-	EmployeeTableModel model;
+	MemberTableModel model;
 	JComboBox gBox;
 	
 	public void init(){
@@ -115,11 +115,11 @@ public class EmployeeView {
 					age = Integer.parseInt(ageField.getText());
 				} catch (Exception ex) {
 				}
-				Employee emp = new Employee();
-				emp.setName(name);
-				emp.setSex(sex);
-				emp.setAge(age);
-				emp.setTelephone(phone);
+				Member mem = new Member();
+				mem.setName(name);
+				mem.setSex(sex);
+				mem.setAge(age);
+				mem.setTelephone(phone);
 				Group gp = new Group();
 				int index = gBox.getSelectedIndex();
 				if (index == 0) {
@@ -127,14 +127,14 @@ public class EmployeeView {
 				} else {
 					gp = gList.get(index - 1);//0开始
 				}
-				emp.setGp(gp);
-				list = empDao.searchByCondition(emp);
+				mem.setGp(gp);
+				list = memDao.searchByCondition(mem);
 				refreshTable(list);
 			}
 		});
 		panel1.add(searchBtn);
-		list = empDao.search();
-		model=new EmployeeTableModel(list);//
+		list = memDao.search();
+		model=new MemberTableModel(list);//
 		table=new JTable();
 		table.setModel(model);
 		//滚动条
@@ -148,12 +148,13 @@ public class EmployeeView {
 		addBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AddEmployeeView aev = AddEmployeeView.getInstance(new CallBack() {
+				AddMemberView aev = AddMemberView.getInstance(new CallBack() {
 					@Override
 					public void call() {
 						refreshTable();
 					}
 				});
+				
 				aev.openFrame();
 			}
 		});
@@ -179,8 +180,8 @@ public class EmployeeView {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				if (index > -1) {
-					Employee selectEmp = list.get(index);
-					new UpdateEmployeeView(selectEmp, new CallBack() {
+					Member selectmem = list.get(index);
+					new UpdateMemberView(selectmem, new CallBack() {
 						@Override
 						public void call() {
 							table.updateUI();
@@ -200,7 +201,7 @@ public class EmployeeView {
 			int option = JOptionPane.showConfirmDialog(null, "确认删除吗？", "确认", JOptionPane.YES_NO_OPTION);
 			if (option == 0) {
 				int id = list.get(index).getId();
-				boolean flag = empDao.delete(id);
+				boolean flag = memDao.delete(id);
 				if (flag) {
 					JOptionPane.showMessageDialog(null, "保存成功！");
 				} else {
@@ -223,7 +224,7 @@ public class EmployeeView {
 					deleteIds += list.get(indexs[i]).getId() + ",";
 				}
 				deleteIds = deleteIds.substring(0, deleteIds.length() - 1);
-				empDao.delete(deleteIds);
+				memDao.delete(deleteIds);
 				refreshTable();
 			}
 		} else {
@@ -231,16 +232,16 @@ public class EmployeeView {
 		}
 	}
 	public void refreshTable() {
-		list = empDao.search();
+		list = memDao.search();
 		model.setList(list);
 		table.updateUI();
 	}
-	public void refreshTable(List<Employee> list) {
+	public void refreshTable(List<Member> list) {
 		model.setList(list);
 		table.updateUI();
 	}
 	
 	public static void main(String[] args) {
-		new EmployeeView().init();
+		new MemberView().init();
 	}
 }

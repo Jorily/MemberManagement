@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import entity.Group;
 import entity.Message;
-import entity.Employee;
+import entity.Member;
 import util.CallBack;
 
 public class UpdateMessageView extends SuperMessageView {
@@ -29,7 +29,7 @@ public class UpdateMessageView extends SuperMessageView {
 		saveBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Employee emp=new Employee();
+				Member emp=new Member();
 				String name = nameText.getText();
 				int time = Integer.parseInt(timeText.getText());
 				String ymd=ymdText.getText();

@@ -70,6 +70,7 @@ public class Login_Regist_View {
 			public void actionPerformed(ActionEvent e) {
 				denglu();
 				new MainView().init();
+				jf.dispose();
 			}
 		});
 		jf.setVisible(true);//使可见
@@ -91,9 +92,8 @@ public class Login_Regist_View {
 			String username = idField.getText();
 			String password = pwdField.getText();
 			d.insert(username,password);
-			JOptionPane.showMessageDialog(null, "注册成功！");
+//			JOptionPane.showMessageDialog(null, "注册成功！");
 		}
-
 
 	public static void main(String[] args) {
 		new Login_Regist_View().init();

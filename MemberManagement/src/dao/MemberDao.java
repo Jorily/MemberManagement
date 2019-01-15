@@ -8,13 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.Employee;
+import entity.Member;
 import entity.Group;
 
-public class EmployeeDao extends BaseDao {
+public class MemberDao extends BaseDao {
 	//查所有
-	public List<Employee> search() {
-		List<Employee> list = new ArrayList<Employee>();
+	public List<Member> search() {
+		List<Member> list = new ArrayList<Member>();
 		Connection conn = null;
 		Statement stat = null;
 		ResultSet rs = null;
@@ -23,23 +23,23 @@ public class EmployeeDao extends BaseDao {
 			// 4 建立statement sql语句执行器
 			stat = conn.createStatement();
 			// 5 执行sql语句并得到结果
-			String sql = "select e.*,g.name as gName,emp_count from employee as e left join "
-					+ " group1 as g on e.g_id=g.id";
+			String sql = "select m.*,g.name as gName,mem_count from member as m left join "
+					+ " group1 as g on m.g_id=g.id";
 			rs = stat.executeQuery(sql);
 			// 6 对结果集进行处理
 			while (rs.next()) {
-				Employee emp = new Employee();
-				emp.setId(rs.getInt("id"));
-				emp.setName(rs.getString("name"));
-				emp.setSex(rs.getString("sex"));
-				emp.setAge(rs.getInt("age"));
-				emp.setTelephone(rs.getString("telephone"));
+				Member mem = new Member();
+				mem.setId(rs.getInt("id"));
+				mem.setName(rs.getString("name"));
+				mem.setSex(rs.getString("sex"));
+				mem.setAge(rs.getInt("age"));
+				mem.setTelephone(rs.getString("telephone"));
 				Group gp = new Group();
 				gp.setId(rs.getInt("g_id"));
 				gp.setName(rs.getString("gName"));
-				gp.setgCount(rs.getInt("emp_count"));//?
-				emp.setGp(gp);
-				list.add(emp);
+				gp.setgCount(rs.getInt("mem_count"));//?
+				mem.setGp(gp);
+				list.add(mem);
 			}
 
 		} catch (SQLException e) {
@@ -53,8 +53,8 @@ public class EmployeeDao extends BaseDao {
 		return list;
 	}
 	//根据条件查询
-	public List<Employee> searchByCondition(Employee condition) {
-		List<Employee> list = new ArrayList<Employee>();
+	public List<Member> searchByCondition(Member condition) {
+		List<Member> list = new ArrayList<Member>();
 		Connection conn = null;
 		Statement stat = null;
 		ResultSet rs = null;
@@ -76,24 +76,24 @@ public class EmployeeDao extends BaseDao {
 			if (condition.getGp().getId() != -1) {
 				where += " and g_id=" + condition.getGp().getId();
 			}
-			String sql = "select e.*,g.name as gName,emp_count from employee as e left join  group1 as g on e.g_id=g.id "
+			String sql = "select m.*,g.name as gName,mem_count from member as m left join  group1 as g on m.g_id=g.id "
 					+ where;
 			rs = stat.executeQuery(sql);
 
 			// 6 对结果集进行处理
 			while (rs.next()) {
-				Employee emp = new Employee();
-				emp.setId(rs.getInt("id"));
-				emp.setName(rs.getString("name"));
-				emp.setSex(rs.getString("sex"));
-				emp.setAge(rs.getInt("age"));
-				emp.setTelephone(rs.getString("telephone"));
+				Member mem = new Member();
+				mem.setId(rs.getInt("id"));
+				mem.setName(rs.getString("name"));
+				mem.setSex(rs.getString("sex"));
+				mem.setAge(rs.getInt("age"));
+				mem.setTelephone(rs.getString("telephone"));
 				Group gp = new Group();
 				gp.setId(rs.getInt("g_id"));
 				gp.setName(rs.getString("gName"));
-				gp.setgCount(rs.getInt("emp_count"));
-				emp.setGp(gp);
-				list.add(emp);
+				gp.setgCount(rs.getInt("mem_count"));
+				mem.setGp(gp);
+				list.add(mem);
 			}
 
 		} catch (Exception e) {
@@ -107,7 +107,7 @@ public class EmployeeDao extends BaseDao {
 		return list;
 	}
 	//增加一个会员
-	public boolean add(Employee emp) {
+	public boolean add(Member mem) {
 		boolean flag = false;
 		Connection conn = null;
 		Statement stat = null;
@@ -116,8 +116,8 @@ public class EmployeeDao extends BaseDao {
 			// 4 建立statement sql语句执行器
 			stat = conn.createStatement();
 			// 5 执行sql语句并得到结果
-			int rs = stat.executeUpdate("insert into employee(name,sex,age,telephone,g_id) values('" + emp.getName() + "','"
-					+ emp.getSex() + "'," + emp.getAge() + "," +emp.getTelephone()+","+ emp.getGp().getId() + ")");
+			int rs = stat.executeUpdate("insert into member(name,sex,age,telephone,g_id) values('" + mem.getName() + "','"
+					+ mem.getSex() + "'," + mem.getAge() + "," +mem.getTelephone()+","+ mem.getGp().getId() + ")");
 			// 6 对结果集进行处理
 			if (rs > 0) {
 				flag = true;
@@ -132,7 +132,7 @@ public class EmployeeDao extends BaseDao {
 		return flag;
 	}
 	//修改会员的信息
-	public boolean update(Employee emp) {
+	public boolean update(Member mem) {
 		boolean flag = false;
 		Connection conn = null;
 		PreparedStatement pstat = null;
@@ -141,18 +141,18 @@ public class EmployeeDao extends BaseDao {
 			// 4 建立statement sql语句执行器
 			// Statement stat = conn.createStatement();
 			// 5 执行sql语句并得到结果
-			// String sql = "update employee set name='" + selectEmp.getName() + "',sex='" +
-			// selectEmp.getSex() + "',age="
-			// + selectEmp.getAge() + " where id=" + selectEmp.getId();
+			// String sql = "update Member set name='" + selectmem.getName() + "',sex='" +
+			// selectmem.getSex() + "',age="
+			// + selectmem.getAge() + " where id=" + selectmem.getId();
 			// System.out.println(sql);
 			// int rs = stat.executeUpdate(sql);
-			String sql = "update employee set name=?,sex=?,age=?,g_id=? where id=?";
+			String sql = "update member set name=?,sex=?,age=?,g_id=? where id=?";
 			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, emp.getName());
-			pstat.setString(2, emp.getSex());
-			pstat.setInt(3, emp.getAge());
-			pstat.setInt(4, emp.getGp().getId());
-			pstat.setInt(5, emp.getId());
+			pstat.setString(1, mem.getName());
+			pstat.setString(2, mem.getSex());
+			pstat.setInt(3, mem.getAge());
+			pstat.setInt(4, mem.getGp().getId());
+			pstat.setInt(5, mem.getId());
 			int rs = pstat.executeUpdate();
 			// 6 对结果集进行处理
 			if (rs > 0) {
@@ -174,7 +174,7 @@ public class EmployeeDao extends BaseDao {
 		PreparedStatement pstat = null;
 		try {
 			conn = getConnection();
-			String sql = "delete from employee where id=?";
+			String sql = "delete from member where id=?";
 			pstat = conn.prepareStatement(sql);
 			pstat.setInt(1, id);
 			int rs = pstat.executeUpdate();
@@ -198,7 +198,7 @@ public class EmployeeDao extends BaseDao {
 		Statement stat = null;
 		try {
 			conn = getConnection();
-			String sql = "delete from employee where id in (" + ids + ")";
+			String sql = "delete from member where id in (" + ids + ")";
 			stat = conn.createStatement();
 
 			int rs = stat.executeUpdate(sql);

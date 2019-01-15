@@ -2,7 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
-public class Employee implements Serializable{
+public class Member implements Serializable{
 	private int id;//会员id
 	private String name;//会员的名字
 	private String sex;//会员的性别

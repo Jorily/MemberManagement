@@ -1,4 +1,4 @@
-package employeeView;
+package memberView;
 
 import java.awt.Dimension;
 import java.util.List;
@@ -12,10 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dao.GroupDao;
-import dao.EmployeeDao;
+import dao.MemberDao;
 import entity.Group;
 
-public class SuperEmployeeView {
+public class SuperMemberView {
 	JFrame frame;
 	JTextField nameText;
 	JComboBox sexBox;
@@ -23,7 +23,7 @@ public class SuperEmployeeView {
 	JTextField phoneText;
 	JButton saveBtn;
 	JComboBox gBox;
-	EmployeeDao empDao = new EmployeeDao();
+	MemberDao memDao = new MemberDao();
 	GroupDao gDao = new GroupDao();
 	List<Group> gList;
 

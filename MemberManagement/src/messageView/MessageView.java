@@ -21,11 +21,11 @@ import javax.swing.JTextField;
 
 import dao.GroupDao;
 import dao.MessageDao;
-import employeeView.UpdateEmployeeView;
 import entity.Car;
-import entity.Employee;
+import entity.Member;
 import entity.Group;
 import entity.Message;
+import memberView.UpdateMemberView;
 import util.CallBack;
 
 public class MessageView {
@@ -90,7 +90,7 @@ public class MessageView {
 
 				String name = nameText.getText();
 				String car = carText.getText();
-				Employee em=new Employee();
+				Member em=new Member();
 				em.setName(name);
 				Message mess = new Message();
 				Car c=new  Car();

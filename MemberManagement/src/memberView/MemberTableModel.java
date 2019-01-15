@@ -1,21 +1,21 @@
-package employeeView;
+package memberView;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import entity.Employee;
+import entity.Member;
 
-public class EmployeeTableModel extends AbstractTableModel {
+public class MemberTableModel extends AbstractTableModel {
 
-	private List<Employee> list;
+	private List<Member> list;
 	private String[] columnNames = { "id", "姓名", "性别", "年龄","联系方式", "组别" };
 
-	public EmployeeTableModel(List<Employee> list) {
+	public MemberTableModel(List<Member> list) {
 		this.list = list;
 	}
 
-	public void setList(List<Employee> list) {
+	public void setList(List<Member> list) {
 		this.list = list;
 	}
 

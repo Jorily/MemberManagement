@@ -1,4 +1,4 @@
-package employeeView;
+package memberView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,25 +6,25 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import entity.Group;
-import entity.Employee;
+import entity.Member;
 import util.CallBack;
 
-public class UpdateEmployeeView extends SuperEmployeeView {
+public class UpdateMemberView extends SuperMemberView {
 	CallBack callBack;
-	Employee selectEmp;
+	Member selectMem;
 
-	public UpdateEmployeeView(Employee selectEmp, CallBack callBack) {
+	public UpdateMemberView(Member selectMem, CallBack callBack) {
 		this.callBack = callBack;
-		this.selectEmp = selectEmp;
+		this.selectMem = selectMem;
 	}
 
 	public void init() {
 		super.init();
-		nameText.setText(selectEmp.getName());
-		sexBox.setSelectedItem(selectEmp.getSex());
-		ageText.setText(String.valueOf(selectEmp.getAge()));
+		nameText.setText(selectMem.getName());
+		sexBox.setSelectedItem(selectMem.getSex());
+		ageText.setText(String.valueOf(selectMem.getAge()));
 
-		gBox.setSelectedItem(selectEmp.getGp().getName());
+		gBox.setSelectedItem(selectMem.getGp().getName());
 
 		saveBtn.addActionListener(new ActionListener() {
 			@Override
@@ -32,16 +32,16 @@ public class UpdateEmployeeView extends SuperEmployeeView {
 				String name = nameText.getText();
 				String sex = (String) sexBox.getSelectedItem();
 				int age = Integer.parseInt(ageText.getText());
-				// Employee emp = new Employee();
-				selectEmp.setName(name);
-				selectEmp.setAge(age);
-				selectEmp.setSex(sex);
+				// Memloyee Mem = new Memloyee();
+				selectMem.setName(name);
+				selectMem.setAge(age);
+				selectMem.setSex(sex);
 
 				Group gp =gList.get(gBox.getSelectedIndex());
-				selectEmp.setGp(gp);;
-				// list.add(emp);
+				selectMem.setGp(gp);;
+				// list.add(Mem);
 
-				boolean flag = empDao.update(selectEmp);
+				boolean flag = memDao.update(selectMem);
 				if (flag) {
 					JOptionPane.showMessageDialog(null, "保存成功！");
 				} else {

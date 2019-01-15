@@ -29,7 +29,7 @@ public class GroupDao extends BaseDao {
 				Group g = new Group();
 				g.setId(rs.getInt("id"));
 				g.setName(rs.getString("name"));
-				g.setgCount(rs.getInt("emp_count"));
+				g.setgCount(rs.getInt("mem_count"));
 				
 				list.add(g);
 			}
@@ -59,7 +59,7 @@ public class GroupDao extends BaseDao {
 				where += " and name='" + condition.getName() + "'";
 			}
 			if (condition.getgCount() != -1) {
-				where += " and emp_count=" + condition.getgCount();
+				where += " and mem_count=" + condition.getgCount();
 			}
 			String sql = "select * from group1 " + where;
 			rs = stat.executeQuery(sql);
@@ -68,7 +68,7 @@ public class GroupDao extends BaseDao {
 				Group g = new Group();
 				g.setId(rs.getInt("id"));
 				g.setName(rs.getString("name"));
-				g.setgCount(rs.getInt("emp_count"));
+				g.setgCount(rs.getInt("mem_count"));
 				list.add(g);
 			}
 		} catch (Exception e) {
@@ -109,15 +109,6 @@ public class GroupDao extends BaseDao {
 		PreparedStatement pstat = null;
 		try {
 			conn = getConnection();
-			// 4 建立statement sql语句执行器
-			// Statement stat = conn.createStatement();
-			// 5 执行sql语句并得到结果
-			// String sql = "update department set name='" + selectEmp.getName() + "',sex='"
-			// +
-			// selectEmp.getSex() + "',age="
-			// + selectEmp.getAge() + " where id=" + selectEmp.getId();
-			// System.out.println(sql);
-			// int rs = stat.executeUpdate(sql);
 			String sql = "update group1 set name=? where id=?";
 			pstat = conn.prepareStatement(sql);
 			pstat.setString(1, g.getName());
@@ -148,7 +139,7 @@ public class GroupDao extends BaseDao {
 			pstat.setInt(1, id);
 			int rs = pstat.executeUpdate();
 			pstat.close();
-			sql = "update employee set g_id=null where g_id=?";
+			sql = "update member set g_id=null where g_id=?";
 			pstat = conn.prepareStatement(sql);
 			pstat.setInt(1, id);
 			rs = pstat.executeUpdate();
