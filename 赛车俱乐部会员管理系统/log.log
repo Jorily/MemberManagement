@@ -1,0 +1,11 @@
+ 2019-01-14 17:24:53 +0800 was Jorily,2 hours ago,message: 赛车俱乐部会员管理系统2.0版本
+ 2019-01-14 13:33:59 +0800 was Jorily,6 hours ago,message: 赛车俱乐部会员管理系统1.0版本
+ 2019-01-14 12:41:45 +0800 was Jorily,6 hours ago,message: 完善message界面功能
+ 2019-01-14 08:56:40 +0800 was Jorily,10 hours ago,message: 完善了数据库message表、r_g_c、v_g_c、v_emp_mess关联表，完成整个界面的功能实现
+ 2019-01-12 14:18:11 +0800 was Jorily,2 days ago,message: 完善group、car表，并在这两个表加了联系，完成组别整个界面的功能并关联显示车界面的内容
+ 2019-01-12 11:55:47 +0800 was Jorily,2 days ago,message: 完成了数据库会员表建成和组别表部分建成，完善了会员界面的显示情况并完成增删改查功能
+ 2019-01-12 09:39:07 +0800 was Jorily,2 days ago,message: 写了基础的数据库，导入了MySQL驱动包，新加登录注册页面的数据库操作类，实现了管理员登录注册功能，登录进去直接进入操作主页
+ 2019-01-11 14:20:30 +0800 was Jorily,3 days ago,message: 新加管理员登录注册页面，变更包名使统一整齐，加上主页面以便管理员进行更方便的操作。
+ 2019-01-10 17:00:00 +0800 was Jorily,4 days ago,message: 给该管理系统会员页面加上操作界面并能获取错在电脑上的文件内容
+ 2019-01-09 19:13:25 +0800 was Jorily,5 days ago,message: 改用ArrayList集合存储每一个对象，并使瞬时存储改为持久化存储
+ 2019-01-02 19:19:53 +0800 was Jorily,12 days ago,message: first commit
