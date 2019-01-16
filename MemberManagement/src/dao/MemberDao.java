@@ -65,7 +65,7 @@ public class MemberDao extends BaseDao {
 			// 5 执行sql语句并得到结果
 			String where = " where 1=1 ";
 			if (!condition.getName().equals("")) {
-				where += " and e.name='" + condition.getName() + "'";
+				where += " and m.name='" + condition.getName() + "'";
 			}
 			if (!condition.getSex().equals("")) {
 				where += " and sex='" + condition.getSex() + "'";

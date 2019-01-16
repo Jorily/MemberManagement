@@ -12,14 +12,14 @@ import util.CallBack;
 public class AddMemberView extends SuperMemberView {
 
 	CallBack callBack;
-	private static AddMemberView instance;//单例
+	private static AddMemberView instance;//单例模式	因为是没有先对象创建对象所以需要写成静态的
 
 	private AddMemberView(CallBack callBack) {
 		this.callBack = callBack;
 	}
 
 	public static AddMemberView getInstance(CallBack callBack) {
-		if (instance == null) {
+		if (instance == null) {//如果空则新建一个，不为空则返回它
 			instance = new AddMemberView(callBack);
 		}
 		return instance;

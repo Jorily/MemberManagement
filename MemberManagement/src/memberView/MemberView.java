@@ -34,7 +34,7 @@ public class MemberView {
 	GroupDao gDao = new GroupDao();
 	JTable table;
 	MemberTableModel model;
-	JComboBox gBox;
+	JComboBox gBox;//下拉列表框
 	
 	public void init(){
 		JFrame jf=new JFrame("赛车俱乐部会员管理系统");
@@ -106,7 +106,6 @@ public class MemberView {
 		searchBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				String name = nameField.getText();
 				String sex = sexField.getText();
 				String phone=phoneField.getText();
